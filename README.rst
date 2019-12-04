@@ -7,12 +7,51 @@ Denoised Embedding Manifold Preservation (DEMaP) is a metric for measuring the q
     :align: center
     :alt: DEMaP Performance Schematic
 
+Install
+-------
+
+Install DEMaP with ``pip``::
+
+    pip install git+https://github.com/scottgigante/DEMaP
+
+To install with all optional dependencies::
+
+    pip install git+https://github.com/scottgigante/DEMaP[scripts]
+
+Run
+---
+
+Run DEMaP as follows::
+
+    import demap
+    data_true = demap.splatter.paths(bcv=0, dropout=0, seed=42)
+    data_noisy = demap.splatter.paths(bcv=0.2, dropout=0.5, seed=42)
+    embedding_noisy = demap.embed.PHATE(data_noisy)
+    demap_score = demap.DEMaP(data_true, embedding_noisy)
+
+Reproduce
+---------
+
+Scripts to reproduce results in the PHATE paper are provided. Either run in series::
+
+    git clone https://github.com/scottgigante/DEMaP
+    cd DEMaP
+    pip install .
+    python scripts/run_demap_splatter.py
+    python scripts/plot_demap_splatter.py
+
+or run in parallel (e.g. on a HPC cluster)::
+
+    for i in {0..399}; do
+        python scripts/run_demap_splatter.py $i &
+    done
+
 Results
 -------
 
 .. image:: img/performance.png
     :align: center
-    :alt: DEMaP Performance Schematic
+    :alt: Detailed results
 
 Contributing
 ------------
