@@ -12,6 +12,6 @@ def DEMaP(data, embedding, knn=30, subsample_idx=None):
     return spearmanr(geodesic_dist, embedded_dist).correlation
 
 
-def geodesic_distance(data, knn=30, distance='data'):
+def geodesic_distance(data, knn=30, distance="data"):
     G = graphtools.Graph(data, knn=knn, decay=None)
     return G.shortest_path(distance=distance)

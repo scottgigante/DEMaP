@@ -64,27 +64,43 @@ _SplatSimulate = RFunction(
             counts() %>%
             t()
         list(data=data, time=sim$Step, branch=sim$Group)
-    """)
+    """,
+)
 
 
 def SplatSimulate(
-        method="paths",
-        nBatches=1, batchCells=100,
-        nGenes=10000,
-        batch_facLoc=0.1, batch_facScale=0.1,
-        mean_rate=0.3, mean_shape=0.6,
-        lib_loc=11, lib_scale=0.2, lib_norm=False,
-        out_prob=0.05,
-        out_facLoc=4, out_facScale=0.5,
-        de_prob=0.1, de_downProb=0.1,
-        de_facLoc=0.1, de_facScale=0.4,
-        bcv_common=0.1, bcv_df=60,
-        dropout_type='none', dropout_prob=0.5,
-        dropout_mid=0, dropout_shape=-1,
-        group_prob=1,
-        path_from=0, path_length=100, path_skew=0.5,
-        path_nonlinearProb=0.1, path_sigmaFac=0.8,
-        seed=None):
+    method="paths",
+    nBatches=1,
+    batchCells=100,
+    nGenes=10000,
+    batch_facLoc=0.1,
+    batch_facScale=0.1,
+    mean_rate=0.3,
+    mean_shape=0.6,
+    lib_loc=11,
+    lib_scale=0.2,
+    lib_norm=False,
+    out_prob=0.05,
+    out_facLoc=4,
+    out_facScale=0.5,
+    de_prob=0.1,
+    de_downProb=0.1,
+    de_facLoc=0.1,
+    de_facScale=0.4,
+    bcv_common=0.1,
+    bcv_df=60,
+    dropout_type="none",
+    dropout_prob=0.5,
+    dropout_mid=0,
+    dropout_shape=-1,
+    group_prob=1,
+    path_from=0,
+    path_length=100,
+    path_skew=0.5,
+    path_nonlinearProb=0.1,
+    path_sigmaFac=0.8,
+    seed=None,
+):
     """
     Global parameters
         nGenes - The number of genes to simulate.
@@ -129,55 +145,83 @@ def SplatSimulate(
         path.sigmaFac - Sigma factor for non-linear gene paths.
     """
     if seed is None:
-        seed = np.random.randint(2**16 - 1)
-    if dropout_type == 'binomial':
+        seed = np.random.randint(2 ** 16 - 1)
+    if dropout_type == "binomial":
         dropout_type = "none"
     else:
         dropout_prob = None
     np.random.seed(seed)
     data = _SplatSimulate(
         method=method,
-        nBatches=nBatches, batchCells=batchCells,
+        nBatches=nBatches,
+        batchCells=batchCells,
         nGenes=nGenes,
-        batch_facLoc=batch_facLoc, batch_facScale=batch_facScale,
-        mean_rate=mean_rate, mean_shape=mean_shape,
-        lib_loc=lib_loc, lib_scale=lib_scale, lib_norm=lib_norm,
+        batch_facLoc=batch_facLoc,
+        batch_facScale=batch_facScale,
+        mean_rate=mean_rate,
+        mean_shape=mean_shape,
+        lib_loc=lib_loc,
+        lib_scale=lib_scale,
+        lib_norm=lib_norm,
         out_prob=out_prob,
-        out_facLoc=out_facLoc, out_facScale=out_facScale,
-        de_prob=de_prob, de_downProb=de_downProb,
-        de_facLoc=de_facLoc, de_facScale=de_facScale,
-        bcv_common=bcv_common, bcv_df=bcv_df,
-        dropout_type=dropout_type, dropout_mid=dropout_mid,
+        out_facLoc=out_facLoc,
+        out_facScale=out_facScale,
+        de_prob=de_prob,
+        de_downProb=de_downProb,
+        de_facLoc=de_facLoc,
+        de_facScale=de_facScale,
+        bcv_common=bcv_common,
+        bcv_df=bcv_df,
+        dropout_type=dropout_type,
+        dropout_mid=dropout_mid,
         dropout_shape=dropout_shape,
         group_prob=group_prob,
-        path_from=path_from, path_length=path_length, path_skew=path_skew,
-        path_nonlinearProb=path_nonlinearProb, path_sigmaFac=path_sigmaFac,
-        seed=seed)
+        path_from=path_from,
+        path_length=path_length,
+        path_skew=path_skew,
+        path_nonlinearProb=path_nonlinearProb,
+        path_sigmaFac=path_sigmaFac,
+        seed=seed,
+    )
     if dropout_prob is not None:
-        data['data'] = np.random.binomial(n=data['data'], p=1 - dropout_prob,
-                                          size=data['data'].shape)
+        data["data"] = np.random.binomial(
+            n=data["data"], p=1 - dropout_prob, size=data["data"].shape
+        )
     return data
 
 
-def _load_splat(dropout=0.5, bcv=0.18, method="paths", n_genes=17580,
-                seed=None, return_groups=False,
-                **kwargs):
+def _load_splat(
+    dropout=0.5,
+    bcv=0.18,
+    method="paths",
+    n_genes=17580,
+    seed=None,
+    return_groups=False,
+    **kwargs
+):
     np.random.seed(seed)
     print(kwargs)
     data = SplatSimulate(
-        method=method, seed=seed,
+        method=method,
+        seed=seed,
         batchCells=10000,  # 16825,
         nGenes=17580,
-        mean_shape=6.6, mean_rate=0.45,
-        lib_loc=8.4 + np.log(2), lib_scale=0.33,
-        out_prob=0.016, out_facLoc=5.4, out_facScale=0.90,
-        bcv_common=bcv, bcv_df=21.6,
+        mean_shape=6.6,
+        mean_rate=0.45,
+        lib_loc=8.4 + np.log(2),
+        lib_scale=0.33,
+        out_prob=0.016,
+        out_facLoc=5.4,
+        out_facScale=0.90,
+        bcv_common=bcv,
+        bcv_df=21.6,
         de_prob=0.2,
-        dropout_type="binomial", dropout_prob=dropout,
+        dropout_type="binomial",
+        dropout_prob=dropout,
         **kwargs,
     )
-    branch = data['branch']
-    data = data['data']
+    branch = data["branch"]
+    data = data["data"]
     if n_genes < data.shape[1]:
         data = data[:, np.random.choice(data.shape[1], n_genes, replace=False)]
     data = scprep.normalize.library_size_normalize(data)
@@ -188,37 +232,64 @@ def _load_splat(dropout=0.5, bcv=0.18, method="paths", n_genes=17580,
     return data
 
 
-def paths(dropout=0.5, bcv=0.18, n_genes=17580, seed=None,
-          # hyperparameters
-          group_prob_rate=10, group_prob_concentration=1,
-          path_skew_shape=10, **kwargs):
+def paths(
+    dropout=0.5,
+    bcv=0.18,
+    n_genes=17580,
+    seed=None,
+    # hyperparameters
+    group_prob_rate=10,
+    group_prob_concentration=1,
+    path_skew_shape=10,
+    **kwargs
+):
     np.random.seed(seed)
     n_groups = np.random.poisson(group_prob_rate)
     group_prob = np.random.dirichlet(
-        np.ones(n_groups) * group_prob_concentration).round(3)
+        np.ones(n_groups) * group_prob_concentration
+    ).round(3)
     group_prob = _sum_to_one(group_prob)
     path_nonlinearProb = np.random.uniform(0, 1)
     path_skew = np.random.beta(path_skew_shape, path_skew_shape, n_groups)
     path_from = [0]
     for i in range(1, n_groups):
         path_from.append(np.random.randint(i))
-    return _load_splat(dropout=dropout, bcv=bcv, n_genes=n_genes,
-                       method="paths", group_prob=group_prob,
-                       path_skew=path_skew,
-                       path_from=path_from,
-                       path_nonlinearProb=path_nonlinearProb,
-                       seed=seed, **kwargs)
+    return _load_splat(
+        dropout=dropout,
+        bcv=bcv,
+        n_genes=n_genes,
+        method="paths",
+        group_prob=group_prob,
+        path_skew=path_skew,
+        path_from=path_from,
+        path_nonlinearProb=path_nonlinearProb,
+        seed=seed,
+        **kwargs,
+    )
 
 
-def groups(dropout=0.5, bcv=0.18, n_genes=17580, seed=None,
-           # hyperparameters
-           group_prob_rate=10, group_prob_concentration=1,
-          **kwargs):
+def groups(
+    dropout=0.5,
+    bcv=0.18,
+    n_genes=17580,
+    seed=None,
+    # hyperparameters
+    group_prob_rate=10,
+    group_prob_concentration=1,
+    **kwargs
+):
     np.random.seed(seed)
     n_groups = np.random.poisson(group_prob_rate)
     group_prob = np.random.dirichlet(
-        np.ones(n_groups) * group_prob_concentration).round(3)
+        np.ones(n_groups) * group_prob_concentration
+    ).round(3)
     group_prob = _sum_to_one(group_prob)
-    return _load_splat(dropout=dropout, bcv=bcv, n_genes=n_genes,
-                       method="groups", group_prob=group_prob,
-                       seed=seed, **kwargs)
+    return _load_splat(
+        dropout=dropout,
+        bcv=bcv,
+        n_genes=n_genes,
+        method="groups",
+        group_prob=group_prob,
+        seed=seed,
+        **kwargs,
+    )

@@ -12,30 +12,34 @@ from .umap import UMAP
 from .monocle import Monocle2
 
 
-all_methods = [PHATE,
-               PCA,
-               DM,
-               MDS,
-               MDS_on_DM,
-               TSNE,
-               TSNE_on_DM,
-               LLE,
-               Isomap,
-               Force_Directed_Layout,
-               UMAP,
-               Monocle2]
+all_methods = [
+    PHATE,
+    PCA,
+    DM,
+    MDS,
+    MDS_on_DM,
+    TSNE,
+    TSNE_on_DM,
+    LLE,
+    Isomap,
+    Force_Directed_Layout,
+    UMAP,
+    Monocle2,
+]
 
-parallel_methods = [PHATE,
-                    PCA,
-                    DM,
-                    MDS,
-                    MDS_on_DM,
-                    TSNE,
-                    TSNE_on_DM,
-                    LLE,
-                    Isomap,
-                    Force_Directed_Layout,
-                    UMAP]
+parallel_methods = [
+    PHATE,
+    PCA,
+    DM,
+    MDS,
+    MDS_on_DM,
+    TSNE,
+    TSNE_on_DM,
+    LLE,
+    Isomap,
+    Force_Directed_Layout,
+    UMAP,
+]
 
 
 non_parallel_methods = [Monocle2]

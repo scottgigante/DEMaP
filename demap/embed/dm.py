@@ -5,8 +5,7 @@ from scipy import sparse
 
 def DM(data, t=1, knn=5, decay=40):
     # symmetric affinity matrix
-    K = graphtools.Graph(
-        data, n_jobs=-1, knn=knn, decay=decay).kernel
+    K = graphtools.Graph(data, n_jobs=-1, knn=knn, decay=decay).kernel
     # degrees
     diff_deg = np.array(np.sum(K, axis=1)).flatten()
     # negative sqrt
@@ -27,8 +26,7 @@ def DM(data, t=1, knn=5, decay=40):
     u1 = U[:, 0][:, None]
     # ensure non-zero
     zero_idx = np.abs(u1) <= np.finfo(float).eps
-    u1[zero_idx] = (np.sign(u1[zero_idx]) * np.finfo(
-        float).eps).reshape(-1)
+    u1[zero_idx] = (np.sign(u1[zero_idx]) * np.finfo(float).eps).reshape(-1)
     # normalize by first eigenvector
     U = U / u1
     # drop first eigenvector

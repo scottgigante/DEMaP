@@ -21,7 +21,8 @@ _Monocle2 = RFunction(
 
     # 2D embedding
     cell_embedding = reducedDimS(data_reduced)
-    t(cell_embedding)""")
+    t(cell_embedding)""",
+)
 
 
 def Monocle2(data):

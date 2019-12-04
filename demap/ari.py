@@ -2,6 +2,7 @@ import numpy as np
 import sklearn.cluster
 import sklearn.metrics
 
+
 def ARI(labels, embedding, subsample_idx=None, n_rep=10):
     if subsample_idx is not None:
         labels = labels[subsample_idx]
