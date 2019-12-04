@@ -18,7 +18,7 @@ doc_requires = [
     "sphinxcontrib-napoleon",
 ]
 
-scripts_requires["umap-learn", "networkx", "rpy2"]
+scripts_requires = ["umap-learn", "networkx", "rpy2"]
 
 if sys.version_info[:2] < (3, 5):
     raise RuntimeError("Python version >=3.5 required.")
