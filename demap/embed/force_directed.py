@@ -5,7 +5,7 @@ import scprep
 networkx = scprep._lazyload.AliasModule("networkx", ["drawing"])
 
 
-@scprep.utils._with_pkg("networkx")
+@scprep.utils._with_pkg(pkg="networkx")
 def Force_Directed_Layout(data, knn=5, decay=40):
     # symmetric affinity matrix
     K = graphtools.Graph(data, n_jobs=-1, knn=knn, decay=decay).kernel
