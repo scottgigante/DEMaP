@@ -1,13 +1,8 @@
 scprep>=0.10.0
 phate>=0.4.0
-fcsparser
 matplotlib
 scipy>=1.2.0
 scikit-learn
 graphtools>=1.0.0
-h5py
-pandas>=0.25
 joblib
-rpy2
-networkx
-umap-learn
+
