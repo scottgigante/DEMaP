@@ -30,7 +30,9 @@ To install with all optional dependencies::
     cd DEMaP
     pip install .[scripts]
 
-To run the Splatter simulation, you will need to have R and the Python package [rpy2](https://bitbucket.org/rpy2/rpy2/src/default/) installed.
+To run the Splatter simulation, you will need to have R and the Python package `rpy2`_. installed.
+
+.. _`rpy2`: https://bitbucket.org/rpy2/rpy2/src/default/
 
 Run
 ---
