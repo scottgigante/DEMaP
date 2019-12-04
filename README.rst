@@ -3,14 +3,14 @@ DEMaP
 
 Denoised Embedding Manifold Preservation (DEMaP) is a metric for measuring the quality of dimensionality reduction for visualization.
 
-.. image:: performance_schematic.png
+.. image:: img/performance_schematic.png
     :align: center
     :alt: DEMaP Performance Schematic
 
 Results
 -------
 
-.. image:: output/performance.png
+.. image:: img/performance.png
     :align: center
     :alt: DEMaP Performance Schematic
 
