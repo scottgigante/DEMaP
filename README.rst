@@ -34,11 +34,17 @@ Reproduce
 
 Scripts to reproduce results in the PHATE paper are provided. Either run in series::
 
+    # setup
     git clone https://github.com/scottgigante/DEMaP
     cd DEMaP
     pip install .
+    mkdir results
+    # this takes a LONG time
     python scripts/run_demap_splatter.py
+    # summarize the results
+    mkdir output
     python scripts/plot_demap_splatter.py
+    python scripts/summarize_demap_splatter.py
 
 or run in parallel (e.g. on a HPC cluster)::
 
