@@ -62,20 +62,21 @@ Scripts to reproduce results in the PHATE paper are provided. Either run in seri
     git clone https://github.com/scottgigante/DEMaP
     cd DEMaP
     pip install .[scripts]
+    cd scripts
 
-    mkdir results
     # this takes a LONG time
+    mkdir ../results
     python scripts/run_demap_splatter.py
 
     # summarize the results
-    mkdir output
+    mkdir ../output
     python scripts/plot_demap_splatter.py
     python scripts/summarize_demap_splatter.py
 
 or run in parallel (e.g. on a HPC cluster)::
 
     for i in {0..399}; do
-        python scripts/run_demap_splatter.py $i &
+        python run_demap_splatter.py $i &
     done
 
 Results
