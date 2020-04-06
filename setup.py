@@ -3,7 +3,7 @@ import sys
 from setuptools import setup, find_packages
 
 install_requires = [
-    "scprep>=0.10.0",
+    "scprep>=1.0.0",
     "phate>=0.4.0",
     "scipy>=1.2.0",
     "scikit-learn",
