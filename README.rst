@@ -30,7 +30,7 @@ To install with all optional dependencies::
     cd DEMaP
     pip install .[scripts]
 
-To run the Splatter simulation, you will need to have R and the Python package `rpy2`_ installed.
+To run the Splatter simulation, you will need to have R >=3.4 and the Python package `rpy2`_ installed. (Note: if running R 3.4, you will need to install Splatter 1.8 from Bioconductor 3.9: see `<https://www.bioconductor.org/install/#Legacy>`_ for details.)
 
 .. _`rpy2`: https://bitbucket.org/rpy2/rpy2/src/default/
 
