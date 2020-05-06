@@ -197,6 +197,7 @@ def _load_splat(
     n_genes=17580,
     seed=None,
     return_groups=False,
+    n_pca=100,
     **kwargs
 ):
     np.random.seed(seed)
@@ -226,7 +227,8 @@ def _load_splat(
         data = data[:, np.random.choice(data.shape[1], n_genes, replace=False)]
     data = scprep.normalize.library_size_normalize(data)
     data = scprep.transform.sqrt(data)
-    data = PCA(data, n_components=100)
+    if n_pca is not None:
+        data = PCA(data, n_components=n_pca)
     if return_groups:
         data = (data, branch)
     return data
